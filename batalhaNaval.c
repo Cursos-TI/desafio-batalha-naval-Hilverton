@@ -8,6 +8,7 @@ int main()
 {
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
+    char colunas[] = "ABCDEFGHIJ";
     int tabuleiro[10][10];
     int navio1[3] = {3, 3, 3};
     int navio2[3] = {3, 3, 3};
@@ -33,13 +34,16 @@ int main()
         }
     }
 
-    for (int i = 0; i < 2; i++)
-    {
-        printf("posição %d\n", position[i]);
+    printf("\n   *** TABULEIRO BATALHA NAVAL ***\n\n   ");
+    for (int j = 0; j < 10; j++) {
+        printf("%c ", colunas[j]);
     }
+    printf("\n");
+
 
     for (int i = 0; i < 10; i++)
     {
+        printf("%2d ", i + 1);
         for (int j = 0; j < 10; j++)
         {
             printf("%d ", tabuleiro[i][j]);
