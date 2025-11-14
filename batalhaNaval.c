@@ -10,24 +10,17 @@ int main()
 	// Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
 	char colunas[] = "ABCDEFGHIJ";
 	int tabuleiro[10][10];
-	int navio1[3] = {3, 3, 3};
-	int navio2[3] = {3, 3, 3};
 
-	int position[4] = {rand() % 7, rand() % 7, rand() % 7, rand() % 7};
+	int position[3] = {rand() % 7, rand() % 7, rand() % 7};
 
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			if (i == position[0] && j < 3)
+			if (i <= 2 && j >= 2 - i && j <= 2 + i)
 			{
 				tabuleiro[i][j] = 3;
 			}
-			else if (j == position[1] && i < 3)
-			{
-				tabuleiro[i][j] = 3;
-			}
-
 			else
 			{
 				tabuleiro[i][j] = 0;
@@ -35,17 +28,30 @@ int main()
 		}
 	}
 
+	for (int i = 3; i < 8; i++)
+	{
+		for (int j = 3; j < 8; j++)
+		{
+			if (j == 5 && tabuleiro[i][j] == 0)
+			{
+				tabuleiro[i][j] = 2;
+			}
+			if (i == 5 && tabuleiro[i][j] == 0)
+			{
+				tabuleiro[i][j] = 2;
+			}
+		}
+	}
+
+	int center_x = 2, center_y = 8;
+
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			if (i == j && i >= position[3] && i < position[3] + 3)
+			if (abs(center_x - i) + abs(center_y - j) <= 1 && tabuleiro[i][j] == 0)
 			{
-				tabuleiro[i][j] = 3; // Preenche a diagonal principal
-			}
-			else if (i + j == 9 && i >= position[4] && i < position[4] + 3)
-			{
-				tabuleiro[i][j] = 3; // Preenche a diagonal secundária
+				tabuleiro[i][j] = 1;
 			}
 		}
 	}
@@ -66,11 +72,6 @@ int main()
 		}
 		printf("\n");
 	}
-
-	// Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-	// Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-	// Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-	// Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
 
 	// Nível Mestre - Habilidades Especiais com Matrizes
 	// Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
